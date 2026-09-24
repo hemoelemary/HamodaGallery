@@ -26,6 +26,11 @@ SECRET_KEY = 'django-insecure-qr3=y=&g&h72t^d@me*a&ra7p)tzbs#+q3y)%y&844pbh1q)qz
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.up.railway.app',
+    'https://*.railway.app',
+]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
