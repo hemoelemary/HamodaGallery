@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HamodaGallery</title>
+    <title>{{object.uploadername}}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,27 +49,19 @@
             top:0;
             z-index:999;
         }
-        #hamoda{
-            animation: name linear 5s;
-            overflow: hidden;
-        }
+
         ::selection{
             color:blue;
         }
-        .card:hover{
-            animation: card linear 2s infinite alternate;
+        html{
+            height: 100%;
+        }
+        body{
+            height:100%;
         }
         a{
             text-decoration: none;
             color:black
-        }
-        @keyframes card{
-            0%{
-                scale:1;
-            }
-            100%{
-                scale:1.1;
-            }
         }
         @keyframes name {
             0%{
@@ -79,21 +71,11 @@
                 transform: translateX(0%);
             }
         }
-        @media(min-width:768px) {
-            .card{
-                width:25%;
-            }
-        }
-        @media(max-width:620px){
-            .card{
-                width:75%;
-            }
-        }
+        
     </style>
 </head>
 <body>
     {% load thumbnail %}
-    {% include 'include/fixed.html' %}
     <header>
         <nav class="border-bottom border-dark bg-white border-2 p-4">
             <div class="d-flex align-items-center">
@@ -103,13 +85,13 @@
                         <li class="fw-bold">نشر</li>
                     </a>
                     <a href="{% url 'gallery:home' %}">
-                        <li class="fw-bold">الرئيسية</li>
+                        <li class="fw-bold" >الرئيسية</li>
                     </a>
                 </ul>
             </div>
         </nav>
     </header>
-    <main>
+    <main style="height: 100%;">
         <section class="hero-0" id="heroimg">
             <div class="w-100 h-100 bg-b d-flex justify-content-center align-items-center">
               <p class="text-white fw-bolder">
@@ -117,54 +99,15 @@
               </p>
             </div>
         </section>
-        <section class="elemaryqoute container p-4">
-            <p class="fw-bolder mx-auto text-center">
-            <q>
-                عملت الموقع ده من تدريباتي على الفرونت والباك في نفس الوقت , فرحني برأيك , اول خطواتي مع دجانجو اخيرا
-            </q>
-            </p>
-            <p class="text-center" id="hamoda">
-                Hamoda Elemary
-            </p>
-        </section>
-        <section id="pics">
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-success text-center" role="alert">
-                {{message}}
+        <section>
+            <div class="w-100" style="background-image: url('{{object.image.url}}');height: {{object.image.height}}px;background-position: center;background-repeat: no-repeat;">
             </div>
-            {% endfor %}
-            {% endif %}
-            <h2 class="text-center">أحدث الصور</h2>
-            <div class="d-flex flex-column flex-md-row gap-2 flex-wrap justify-content-center justify-content-md-between align-items-center">
-                {% for object in objects %}
-                <div class="card shadow-lg cardol" style="max-height: 500px; overflow: hidden;">
-                    {% thumbnail object.image "300x300" crop="center" as im %}
-                    <img src="{{ im.url }}" class="card-img-top" width="{{ im.width }}" height="{{ im.height }}">
-                    {% endthumbnail %}
-                    <div class="card-body h-100">
-                        <div class="card-title text-center">
-                            :اسم الصورة
-                        <br>
-                        <b>
-                            {{object.picname}}
-                        </b>
-                        </div>
-                        <div class="card-text text-center">
-                            :صاحب الصورة
-                            <br>
-                            <b>
-                                {{object.uploadername}}
-                            </b>
-                            </div>
-                        <a href="/detail/{{object.id}}">
-
-                            <div class="btn btn-primary mx-auto w-100 my-2">التفاصيل</div>
-                        </a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+                <h4 class="text-secondary m-2 text-center">
+                    :صاحب الصورة
+                <br>
+                    {{object.uploadername}}
+                </h4>
+                <p class="text-center fw-bolder">{{object.details}}</p>
         </section>
     </main>
     <footer>

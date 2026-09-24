@@ -49,27 +49,19 @@
             top:0;
             z-index:999;
         }
-        #hamoda{
-            animation: name linear 5s;
-            overflow: hidden;
-        }
+
         ::selection{
             color:blue;
         }
-        .card:hover{
-            animation: card linear 2s infinite alternate;
+        html{
+            height: 100%;
+        }
+        body{
+            height:500px;
         }
         a{
             text-decoration: none;
             color:black
-        }
-        @keyframes card{
-            0%{
-                scale:1;
-            }
-            100%{
-                scale:1.1;
-            }
         }
         @keyframes name {
             0%{
@@ -79,21 +71,10 @@
                 transform: translateX(0%);
             }
         }
-        @media(min-width:768px) {
-            .card{
-                width:25%;
-            }
-        }
-        @media(max-width:620px){
-            .card{
-                width:75%;
-            }
-        }
+        
     </style>
 </head>
 <body>
-    {% load thumbnail %}
-    {% include 'include/fixed.html' %}
     <header>
         <nav class="border-bottom border-dark bg-white border-2 p-4">
             <div class="d-flex align-items-center">
@@ -109,7 +90,7 @@
             </div>
         </nav>
     </header>
-    <main>
+    <main style="height: 100%;">
         <section class="hero-0" id="heroimg">
             <div class="w-100 h-100 bg-b d-flex justify-content-center align-items-center">
               <p class="text-white fw-bolder">
@@ -117,55 +98,35 @@
               </p>
             </div>
         </section>
-        <section class="elemaryqoute container p-4">
-            <p class="fw-bolder mx-auto text-center">
-            <q>
-                عملت الموقع ده من تدريباتي على الفرونت والباك في نفس الوقت , فرحني برأيك , اول خطواتي مع دجانجو اخيرا
-            </q>
-            </p>
-            <p class="text-center" id="hamoda">
-                Hamoda Elemary
-            </p>
-        </section>
-        <section id="pics">
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-success text-center" role="alert">
-                {{message}}
-            </div>
-            {% endfor %}
-            {% endif %}
-            <h2 class="text-center">أحدث الصور</h2>
-            <div class="d-flex flex-column flex-md-row gap-2 flex-wrap justify-content-center justify-content-md-between align-items-center">
-                {% for object in objects %}
-                <div class="card shadow-lg cardol" style="max-height: 500px; overflow: hidden;">
-                    {% thumbnail object.image "300x300" crop="center" as im %}
-                    <img src="{{ im.url }}" class="card-img-top" width="{{ im.width }}" height="{{ im.height }}">
-                    {% endthumbnail %}
-                    <div class="card-body h-100">
-                        <div class="card-title text-center">
-                            :اسم الصورة
-                        <br>
-                        <b>
-                            {{object.picname}}
-                        </b>
-                        </div>
-                        <div class="card-text text-center">
-                            :صاحب الصورة
-                            <br>
-                            <b>
-                                {{object.uploadername}}
-                            </b>
-                            </div>
-                        <a href="/detail/{{object.id}}">
+        <div class="container d-flex justify-content-center align-items-center h-100">
+            <div class="card  fw-bolder w-75 w-md-50 my-3 shadow mx-auto">
+                <form method="post" class="form" action="" enctype="multipart/form-data" class="d-flex justify-content-center flex-column gap-3">
+                    {% csrf_token %}
+                    <div class="form-container w-100 d-flex justify-content-center align-items-center flex-column gap-2 my-2">
 
-                            <div class="btn btn-primary mx-auto w-100 my-2">التفاصيل</div>
-                        </a>
+                        <label for="name" class="text-center">صاحب الصورة</label>
+                        <input type="text" placeholder="حمودة" class="form-control text-center w-100 " name="uploadername" id="name">
                     </div>
-                </div>
-                {% endfor %}
+                    <div class="form-container w-100 d-flex justify-content-center align-items-center flex-column gap-2 my-2">
+
+                        <label for="desc" class="text-center">التفاصيل</label>
+                        <textarea placeholder="تفاصيل الصورة بتاعتي" class="form-control w-100 w-md-25 text-center" name="details" id="desc" style="max-height: 200px;"></textarea>
+                    </div>
+                    <div class="form-container w-100 d-flex justify-content-center align-items-center flex-column gap-2 my-2">
+
+                        <label for="pic" class="text-center">الصورة</label>
+                        <input type="file" class="form-control w-100 w-md-25" name="image" id="pic">
+                    </div>
+
+                    <div class="form-container w-100 d-flex justify-content-center align-items-center flex-column gap-2 my-2">
+
+                        <label for="picname" class="text-center">اسم الصورة</label>
+                        <input type="text" class="form-control w-100 w-md-25" name="picname" id="picname">
+                    </div>
+                        <button type="submit" class="btn btn-primary w-100">حفظ</button>
+                </form>
             </div>
-        </section>
+        </div>
     </main>
     <footer>
 
