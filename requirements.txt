@@ -1,0 +1,7 @@
+Django==6.1.1
+gunicorn==23.0.0
+Pillow==11.3.0
+sorl-thumbnail==12.11.0
+whitenoise==6.9.0
+dj-database-url==2.3.0
+psycopg[binary]==3.2.9
