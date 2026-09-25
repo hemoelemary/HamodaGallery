@@ -12,8 +12,8 @@ I have used html css js bootstrap jquery django to make this project
 Day 1: I focused entirely on the front-end, adding smooth animations and transitions, and optimizing the responsive design using Bootstrap breakpoints.
 
 Day 2 (Today): This was all about building with Django from scratch. It was honestly a great experience working with Class-Based Views, especially Generic Views.
->mobile
+mobile
 <img src='mobile.webp'>
 <br>
->desktop
+desktop
 <img src='desktop.png'>
