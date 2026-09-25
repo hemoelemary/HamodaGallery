@@ -13,9 +13,10 @@ Day 1: I focused entirely on the front-end, adding smooth animations and transit
 <br>
 Day 2 (Today): This was all about building with Django from scratch. It was honestly a great experience working with Class-Based Views, especially Generic Views.
 <br>
-mobile
-<img src='mobile.webp' align='center'>
-<br>
 desktop
-<br>
 <img src='desktop.png'>
+<br>
+mobile
+<img src='mobile.webp'>
+<br>
+
